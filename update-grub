@@ -1,7 +1,3 @@
 #!/bin/sh
-
-# Stop script on error
 set -e
-
-# Gen grub config
 grub-mkconfig -o /boot/grub/grub.cfg
