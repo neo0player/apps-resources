@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2027, Kolya
+
+# Stop script on error
+#set -e
+
+# Display help fn
+display_help() {
+	printf "\n Usage: $0 [options]\n"
+	printf "\n Args:\n"
+	printf "  --help          | Show this help message and exit\n\n"
+	printf "  -d <dev>        | Write image to device\n"
+	printf "  -b <block size> | Block size (default 4M)\n"
+	printf "  -sync           | Check writted after write to device (default false)\n\n"
+	exit 0
+}
+
+# Vars
+dev=""
+bs="4M"
+sync_enabled=false
+
+# Arg handler
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-d)
+			dev="$2"
+			shift 2
+			;;
+		-b)
+			bs="$2"
+			shift 2
+			;;
+		-sync)
+			sync_enabled="true"
+			shift
+			;;
+		--help)
+			display_help
+			;;
+		*)
+			printf "\n dd_img: unknown arg: $1\n"
+			printf " Try --help for more info\n\n"
+			exit 1
+			;;
+	esac
+done
+
+# Check required arg dev
+if [ -z "$dev" ]; then
+	printf "\n dd_img: device not specified: dev /dev/sda\n"
+	printf " Try --help for more info\n\n"
+	exit 0
+fi
+
+# Write image to dev
+dd if="$out_meta_os_ntux_stable_amd_amd64_img_full_dir$meta_ntux_stable_amd_amd64_iso" of="$dev" bs="$bs" status=progress
+
+# Perform sync if -sync is specified
+if [ "$sync_enabled" = true ]; then
+	sync
+fi
