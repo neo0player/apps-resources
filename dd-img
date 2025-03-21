@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-display_help() { printf "\n Usage: $0 [options]\n\n Args:\n  --help          | Show this help message and exit\n\n  -d <dev>        | Write image to device\n  -b <block size> | Block size (default 4M)\n  -sync           | Check writted after write to device (default false)\n\n"; exit 0; }
+display_help(){ printf "\n Usage: $0 [options]\n\n Args:\n  --help          | Show this help message and exit\n\n  -d <dev>        | Write image to device\n  -b <block size> | Block size (default 4M)\n  -sync           | Check writted after write to device (default false)\n\n"; exit 0; }
 dev="" bs="4M" sync_enabled=false
 while [ $# -gt 0 ]; do
 case "$1" in
