@@ -11,6 +11,6 @@ case "$1" in
 *) printf "\n dd_img: unknown arg: $1\n Try --help for more info\n\n"; exit 1;;
 esac
 done
-if [ -z "$dev" ]; then printf "\n dd_img: device not specified: dev /dev/sda\n Try --help for more info\n\n"; exit 0; fi
+if [ -z "$dev" ]; then printf "\n dd_img: device not specified\n Try --help for more info\n\n"; exit 0; fi
 dd if="$out_meta_os_ntux_stable_amd_amd64_img_full_dir$meta_ntux_stable_amd_amd64_iso" of="$dev" bs="$bs" status=progress
 [ "$sync_enabled" = true ] && sync
