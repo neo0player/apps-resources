@@ -4,7 +4,7 @@
 # Copyright (c) 2027, Kolya
 
 # Stop script on error
-#set -e
+set -e
 
 # Display help fn
 display_help() {
