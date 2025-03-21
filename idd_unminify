@@ -50,7 +50,7 @@ done
 
 # Check required arg dev
 if [ -z "$dev" ]; then
-	printf "\n dd_img: device not specified: dev /dev/sda\n"
+	printf "\n dd_img: device not specified\n"
 	printf " Try --help for more info\n\n"
 	exit 0
 fi
