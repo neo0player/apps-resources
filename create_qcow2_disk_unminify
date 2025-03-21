@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2027, Kolya
+
+# Stop script on error
+set -e
+
+# Vars
+qcow2_disk_size="32G"
+
+# Parse args
+while [ $# -gt 0 ]; do
+	case "$1" in
+		# Disk size arg
+		-size)
+			shift
+			qcow2_disk_size="$1"
+			;;
+		*)
+			break
+			;;
+	esac
+	shift
+done
+
+# Create dirs
+mkdir -p "$out_meta_os_ntux_stable_amd_amd64_img_full_dir"
+
+# Qemu img
+qemu-img create -f qcow2 \
+	"$out_meta_os_ntux_stable_amd_amd64_img_full_dir$meta_ntux_stable_amd_amd64_qcow2_disk" \
+	"$qcow2_disk_size" \
+	"$@"
